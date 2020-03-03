@@ -1,3 +1,3 @@
 # Pomodoro-Clock
 
-A Compact Timer
+Built using pure JavaScript
