@@ -53,6 +53,7 @@ function Update()
     let seconds = Math.floor(timeLeft % 60);
     if (seconds <= 9) seconds = "0" + seconds;
 
+    document.title = minutes + ":" + seconds;
     display.innerHTML = minutes + ":" + seconds;
 }
 
