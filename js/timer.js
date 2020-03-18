@@ -1,106 +1,59 @@
-var timer = document.getElementById("timer");
+const display = document.getElementById("timer");
+const toggleButton = document.getElementById("start-stop");
+const resetButton = document.getElementById("reset");
 
-var toggleButton = document.getElementById("start-stop");
-var resetButton = document.getElementById("reset");
-toggleButton.addEventListener("click", ToggleTimer);
-resetButton.addEventListener("click", ResetTimer);
+toggleButton.addEventListener("click", Toggle);
+resetButton.addEventListener("click", Reset);
 
-var countdown = 0;
-var currentSection = "Pomodoro";
+let startedAt = 0;
+let elapsed = 0;
+let running = false;
+let targetMinutes = 25;
 
-// Start if countdown not running, stop if it's running.
-function ToggleTimer()
+function Toggle()
 {
-    if (IsCountdownRunning())
-        StopTimer()
-    else
-        StartTimer()
+    if (running) Stop();
+    else         Start();
 }
-
-// Start the countdown
-function StartTimer()
+function Start()
 {
-    if (IsCountdownRunning())
-        return
-
-    countdown = setInterval(() => {
-        ChangeTimer(GetTime() - 1)
-    }, 1000)
-
+    startedAt = Date.now();
     toggleButton.className = "stop"
     toggleButton.innerHTML = "Stop"
+    running = true;
 }
-
-// Stop the countdown
-function StopTimer()
+function Stop()
 {
-    if (IsCountdownRunning())
-        clearInterval(countdown)
-    
-    countdown = 0
+    elapsed += parseInt((Date.now() - startedAt) / 1000);
     document.title = "Pomodoro Clock"
-
     toggleButton.className = "start"
     toggleButton.innerHTML = "Start"
+    running = false;
 }
-function ResetTimer()
+function Reset()
 {
-    StopTimer()
-
-    if (currentSection == "Pomodoro")
-        timer.innerHTML = "25:00"
-    else
-        timer.innerHTML = "5:00"
+    Stop();
+    elapsed = 0;
+    display.innerHTML = targetMinutes + ":00";
 }
 
-// Change the display text
-function ChangeTimer(newTime)
+function Update()
 {
-    if (newTime <= 0)
-    {
-        ChangeTimerText("0:00");
-        StopTimer();
-    }
-    else
-    {
-        var text = TimeToText(newTime);
-        ChangeTimerText(text);
-    }
+    if (!running)
+        return;
+
+    const targetSeconds = targetMinutes * 60;
+    const diff = parseInt((Date.now() - startedAt) / 1000);
+    const timeLeft = targetSeconds - (elapsed + diff);
+
+    if (timeLeft == 0)
+        Reset();
+
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = Math.floor(timeLeft % 60);
+    if (seconds <= 9) seconds = "0" + seconds;
+
+    display.innerHTML = minutes + ":" + seconds;
 }
 
-// Update Timer's text and document title.
-function ChangeTimerText(text)
-{
-    timer.innerHTML = text;
-    document.title = text;
-}
-
-function IsCountdownRunning()
-{ return countdown > 0 }
-
-// How many seconds left
-function GetTime()
-{ return TextToTime(timer.innerHTML) }
-
-// Display text to seconds
-// 10:00 to 600, for example.
-function TextToTime(text)
-{
-    splitted = text.split(":")
-    minutes = parseInt(splitted[0] * 60)
-    seconds = parseInt(splitted[1])
-    return minutes + seconds
-}
-
-// Seconds to display text.
-// 600 to 10:00, for example.
-function TimeToText(time)
-{
-    minutes = Math.floor(time / 60)
-    seconds = time % 60
-
-    if (seconds <= 9)
-        seconds = "0" + seconds
-
-    return minutes + ":" + seconds
-}
+setInterval(Update, 1000);
