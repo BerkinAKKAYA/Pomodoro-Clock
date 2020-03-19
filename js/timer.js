@@ -46,7 +46,7 @@ function Update()
     const diff = parseInt((Date.now() - startedAt) / 1000);
     const timeLeft = targetSeconds - (elapsed + diff);
 
-    if (timeLeft == 0)
+    if (timeLeft <= 0)
         Reset();
 
     let minutes = Math.floor(timeLeft / 60);
