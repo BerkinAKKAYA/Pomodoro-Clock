@@ -57,4 +57,4 @@ function Update()
     display.innerHTML = minutes + ":" + seconds;
 }
 
-setInterval(Update, 1000);
+setInterval(Update, 500);
