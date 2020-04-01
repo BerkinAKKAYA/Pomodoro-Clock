@@ -1,6 +1,7 @@
 const display = document.getElementById("timer");
 const toggleButton = document.getElementById("start-stop");
 const resetButton = document.getElementById("reset");
+const soundEffect = document.getElementById("sound-effect");
 
 toggleButton.addEventListener("click", Toggle);
 resetButton.addEventListener("click", Reset);
@@ -35,6 +36,7 @@ function Reset()
     Stop();
     elapsed = 0;
     display.innerHTML = targetMinutes + ":00";
+    soundEffect.pause();
 }
 
 function Update()
@@ -47,7 +49,10 @@ function Update()
     const timeLeft = targetSeconds - (elapsed + diff);
 
     if (timeLeft <= 0)
+    {
+        soundEffect.play();
         Reset();
+    }
 
     let minutes = Math.floor(timeLeft / 60);
     let seconds = Math.floor(timeLeft % 60);
