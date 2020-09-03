@@ -2,6 +2,9 @@
 
 Built using pure JavaScript, [Try It](https://berkinakkaya.github.io/Pomodoro-Clock/).
 
-Please see [Pomolog](pomolog-berkinakkaya.web.app) for a more advanced project.
+> **NOTE:** [Pomolog](pomolog-berkinakkaya.web.app) is the mix of [Pomodoro Tracker][tracker] and [Pomodoro Clock](clock)
 
 ![Screenshot](https://berkinakkaya.github.io/Pomodoro-Clock/img/Screenshot.jpg)
+
+[tracker]: https://github.com/BerkinAKKAYA/Pomodoro-Tracker
+[clock]: https://github.com/BerkinAKKAYA/Pomodoro-Clock
