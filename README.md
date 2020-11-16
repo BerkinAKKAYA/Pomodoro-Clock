@@ -1,6 +1,6 @@
 # Pomodoro-Clock
 
-Built using pure JavaScript, [Try It][clock].
+Built using pure JavaScript, [Try It][live].
 
 > **NOTE:** [Pomolog][pomolog] is the mix of [Pomodoro Tracker][tracker] and [Pomodoro Clock](clock)
 
@@ -10,3 +10,4 @@ Built using pure JavaScript, [Try It][clock].
 [tracker]: https://github.com/BerkinAKKAYA/Pomodoro-Tracker
 [clock]: https://github.com/BerkinAKKAYA/Pomodoro-Clock
 [ss]: https://berkinakkaya.github.io/Pomodoro-Clock/img/Screenshot.jpg
+[live]: https://berkinakkaya.github.io/Pomodoro-Clock/
